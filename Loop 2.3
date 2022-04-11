@@ -1,0 +1,26 @@
+#include <stdio.h> //need for exit();
+#include <stdlib.h> //for fork and getpid()
+#include <unistd.h> // printf
+#include <sys/wait.h> // wait
+#include <sys/types.h>
+void childTask(){
+	printf("Bismillah Assalamualaikum, saya anak tau\n");
+}
+void parentTask(){
+	printf("Dan saya adalah bapaknya\n");
+}
+int main(void){
+pid_t pid = fork();
+ if (pid ==0){
+	 childTask();
+	 exit(EXIT_SUCCESS);
+}
+else if(pid > 0 ){
+	wait(NULL);
+	parentTask();
+}
+else{
+	printf("Unable to create a child process\n");
+}
+return EXIT_SUCCESS;
+}
